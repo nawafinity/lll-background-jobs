@@ -15,78 +15,81 @@
 <body>
     <div id="dasapp">
         <div class="container-xl">
-            <header class="py-3 border-1 border-bottom conreq">
-                <div class="row">
-                    <div class="col-12 col-lg-6">
-                        <div class="d-flex flex-row align-items-center">
-                            <h2 class="me-3">Moniter</h2>
-                            <span class="text-muted">A <span class="text-pink">cute</span> visualizing of
-                                job-queue</span>
-                        </div>
-                    </div>
-                    <div class="col-12 col-lg-6">
-                        <div class="d-flex flex-row align-items-center justify-content-end">
-                            <button class="conreq btn btn-outline-primary">Create Job</button>
-                        </div>
-                    </div>
-                </div>
-            </header>
-
-            <main>
-                <div id="connecting" class="vh-100 text-center">
-                    <div class="d-flex h-100 justify-content-center align-items-center flex-column">
-                        <div id="loader" class="spinner-border text-secondary" role="status">
-                            <span class="visually-hidden">Loading...</span>
-                        </div>
-
-                        <div class="mt-3">
-                            <h5 data-loading-header></h5>
-                            <p data-loading-description></p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="conreq">
-                    <nav class="navbar" style="background-color: #f2f2f2;">
-                        <div class="container-xl">
-                            <div class="stats w-100 d-flex flex-row align-items-center align-content-center justify-content-center">
-                                <div class="stats-item text-center text-primary px-4">
-                                    <i class="d-block mb-1 bi bi-hourglass"></i>
-                                    <span>Completed</span>
-                                    <strong class="d-block" data-stats-completed>N/A</strong>
-                                </div>
-                                <div class="stats-item text-center text-pink px-4 me-2">
-                                    <i class="d-block mb-1 bi bi-terminal"></i>
-                                    <span>Active</span>
-                                    <strong class="d-block" data-stats-active>N/A</strong>
-                                </div>
-                                <div class="stats-item text-center text-warning px-4 me-2">
-                                    <i class="d-block mb-1 bi bi-pause-btn"></i>
-                                    <span>Paused</span>
-                                    <strong class="d-block" data-stats-paused>N/A</strong>
-                                </div>
-                                <div class="stats-item text-center text-info px-4 me-2">
-                                    <i class="d-block mb-1 bi bi-clock-history"></i>
-                                    <span>Delayed</span>
-                                    <strong class="d-block" data-stats-delayed>N/A</strong>
-                                </div>
-                                <div class="stats-item text-center text-danger px-4 me-2">
-                                    <i class="d-block mb-1 bi bi-x-circle"></i>
-                                    <span>Failed</span>
-                                    <strong class="d-block" data-stats-failed>N/A</strong>
-                                </div>
+            <div class="conreq" id="header">
+                <header class="py-3 border-1 border-bottom conreq">
+                    <div class="row">
+                        <div class="col-12 col-lg-6">
+                            <div class="d-flex flex-row align-items-center">
+                                <h2 class="me-3">Moniter</h2>
+                                <span class="text-muted">A <span class="text-pink">cute</span> visualizing of
+                                    job-queue</span>
                             </div>
                         </div>
-                    </nav>
-
-                    <div class="mt-3 jobs-log">
-                        <div class="d-flex flex-row flex-fill">
-                            <div class="h-100 border-1 border-end" data-log-completed></div>
-                            <div class="h-100 border-1 border-end" data-log-active></div>
-                            <div class="h-100 border-1 border-end" data-log-paused></div>
-                            <div class="h-100 border-1 border-end" data-log-delayed></div>
-                            <div class="h-100" data-log-failed></div>
+                        <div class="col-12 col-lg-6">
+                            <div class="d-flex flex-row align-items-center justify-content-end">
+                                <button class="conreq btn btn-outline-primary">Create Job</button>
+                            </div>
                         </div>
+                    </div>
+                </header>
+
+                <nav class="navbar" style="background-color: #f2f2f2;">
+                    <div class="container-xl">
+                        <div
+                            class="stats w-100 d-flex flex-row align-items-center align-content-center justify-content-center">
+                            <div class="stats-item text-center text-primary px-4">
+                                <i class="d-block mb-1 bi bi-hourglass"></i>
+                                <span>Completed</span>
+                                <strong class="d-block" data-stats-completed>N/A</strong>
+                            </div>
+                            <div class="stats-item text-center text-pink px-4 me-2">
+                                <i class="d-block mb-1 bi bi-terminal"></i>
+                                <span>Active</span>
+                                <strong class="d-block" data-stats-active>N/A</strong>
+                            </div>
+                            <div class="stats-item text-center text-warning px-4 me-2">
+                                <i class="d-block mb-1 bi bi-pause-btn"></i>
+                                <span>Paused</span>
+                                <strong class="d-block" data-stats-paused>N/A</strong>
+                            </div>
+                            <div class="stats-item text-center text-info px-4 me-2">
+                                <i class="d-block mb-1 bi bi-clock-history"></i>
+                                <span>Delayed</span>
+                                <strong class="d-block" data-stats-delayed>N/A</strong>
+                            </div>
+                            <div class="stats-item text-center text-danger px-4 me-2">
+                                <i class="d-block mb-1 bi bi-x-circle"></i>
+                                <span>Failed</span>
+                                <strong class="d-block" data-stats-failed>N/A</strong>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+
+            <!-- Loading -->
+            <div id="connecting" class="vh-100 text-center">
+                <div class="d-flex h-100 justify-content-center align-items-center flex-column">
+                    <div id="loader" class="spinner-border text-secondary" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+
+                    <div class="mt-3">
+                        <h5 data-loading-header></h5>
+                        <p data-loading-description></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main content -->
+            <main class="conreq">
+                <div class="jobs-log h-100">
+                    <div class="jobs-log-inner h-100">
+                        <div class="jobs-log-item" data-log-completed></div>
+                        <div class="jobs-log-item" data-log-active></div>
+                        <div class="jobs-log-item" data-log-paused></div>
+                        <div class="jobs-log-item" data-log-delayed></div>
+                        <div class="jobs-log-item" data-log-failed></div>
                     </div>
                 </div>
             </main>

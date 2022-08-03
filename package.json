@@ -8,6 +8,7 @@
     "body-parser": "^1.15.2",
     "bull": "^4.8.5",
     "express": "^4.10.2",
+    "log-beautify": "^1.2.0",
     "node-resque": "^9.2.0",
     "redis": "^4.2.0",
     "socket.io": "^4.5.1",
