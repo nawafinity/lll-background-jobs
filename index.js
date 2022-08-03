@@ -3,7 +3,8 @@
  */
 const { getAllJobs } = require('./helpers/actions');
 const { app, socket, queue, redis } = require('./spirit/core')
-const log = require('log-beautify')
+const log = require('log-beautify');
+const { jobHandler } = require('./helpers/jobs');
 
 /**
  * Express configurations
@@ -37,20 +38,16 @@ queue.process((job, done) => {
     socket.emit('topics', job)
 
     jobHandler(job).then(() => {
+        // Close this job forever
         done()
+
+        // Reload UI
         socket.emit('hydrate')
     })
 })
 
 // Our redis client, we will initilize it in `/api/connect`
 let interval;
-
-let jobQueue;
-
-/**
- * Start Express
- */
-
 
 /**
  * Main moniter page
@@ -62,32 +59,6 @@ app.get('/', function (req, res) {
 });
 
 /**
- * Job handler
- *
- * This function will use to handle the created jobs.
- */
-async function jobHandler(job) {
-    const currentJob = await queue.getJob(job.id)
-
-    socket.emit(`job-${currentJob.id}-progress`, 3)
-    currentJob.progress(3)
-
-    return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            currentJob.progress(55)
-            socket.emit(`job-${currentJob.id}-progress`, 55)
-
-
-
-            setTimeout(() => {
-                currentJob.progress(100)
-                socket.emit(`job-${currentJob.id}-progress`, 100)
-                resolve('done')
-            }, 3000)
-        }, 2000)
-    })
-}
-/**
  * An api to close the connection.
  */
 app.post('/api/reset', function (req, res, next) {
@@ -97,22 +68,6 @@ app.post('/api/reset', function (req, res, next) {
         status: 'OK'
     });
 });
-
-app.get('/api/jobs/all', async (req, res, next) => {
-    const completedJobs = await queue.getJobs(['completed'])
-    const activeJobs = await queue.getJobs(['active'])
-    const pausedJobs = await queue.getJobs(['paused'])
-    const delayedJobs = await queue.getJobs(['delayed'])
-    const failedJobs = await queue.getJobs(['failed'])
-
-    res.status(200).json({
-        completed: completedJobs,
-        active: activeJobs,
-        paused: pausedJobs,
-        delayed: delayedJobs,
-        failed: failedJobs
-    })
-})
 
 /**
  * An api to fake some jobs
@@ -139,28 +94,3 @@ app.get('/api/jobs/create', async (request, response, next) => {
     }
 })
 
-/**
- * An api to check the connection (Redis connection),
- * this going to keep trying until connection
- */
-app.post('/api/connect', async function (request, response, next) {
-    let host = request.body.host,
-        port = request.body.port;
-
-    let redisClient = createClient({
-        url: 'redis://' + ':' + '' + '@' + host + ':' + port
-    });
-
-    // Redis not connected
-    redisClient.on('error', function (err) {
-        return next(err);
-    });
-
-
-    // Wait for redis
-    await redisClient.connect()
-    console.log('[Redis] Connected.')
-    return response.status(200).json({
-        status: 'OK'
-    })
-});
