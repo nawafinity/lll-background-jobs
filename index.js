@@ -174,7 +174,6 @@ app.post('/api/connect', async function (request, response, next) {
 
     // Redis not connected
     redisClient.on('error', function (err) {
-        redisClient.end()
         return next(err);
     });
 
