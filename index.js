@@ -9,7 +9,7 @@ const { jobHandler } = require('./helpers/jobs');
 /**
  * Express configurations
  */
- let clients = [];
+let clients = [];
 
 socket.on('connection', (client) => {
     log.info(`Someone join the party: ${client.id}`)
@@ -34,8 +34,12 @@ socket.on('connection', (client) => {
         })
     })
 
-    client.on('clear log', () => {
+    client.on('clear jobs queue', async () => {
+        log.info('[Queue] Clearning...')
+        await queue.clean(0, 'completed')
+        log.info('[Queue] Cleared.')
 
+        client.emit('hydrate')
     })
 
     client.on('create job', async (data) => {
@@ -44,9 +48,29 @@ socket.on('connection', (client) => {
 
         socket.emit('hydrate')
     })
+
+    client.on('restart job', async (id) => {
+        log.info(`[Queue] Restarting job (${id})`)
+        const job = await queue.getJob(id)
+        await job.retry()
+        socket.emit('hydrate')
+    })
+
+    client.on('pause job', async (id) => {
+        log.info(`[Queue] Pause job (${id})`)
+        const job = await queue.getJob(id)
+        await job.discard()
+        await job.moveToFailed()
+
+        socket.emit('hydrate')
+    })
+
+    client.on('resume job', async (id) => {
+
+    })
 })
 
-socket.on('disconnect', async (client)=>{
+socket.on('disconnect', async (client) => {
     log.info(`Client (${client}) disconnected.`)
 
     // do something
