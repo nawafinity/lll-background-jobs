@@ -20,14 +20,15 @@
                     <div class="row">
                         <div class="col-12 col-lg-6">
                             <div class="d-flex flex-row align-items-center">
-                                <h2 class="me-3">Moniter</h2>
+                                <h2 class="me-3">Monitor</h2>
                                 <span class="text-muted">A <span class="text-pink">cute</span> visualizing of
                                     job-queue</span>
                             </div>
                         </div>
                         <div class="col-12 col-lg-6">
                             <div class="d-flex flex-row align-items-center justify-content-end">
-                                <button class="conreq btn btn-outline-primary">Create Job</button>
+                                <button class="conreq btn btn-outline-primary me-2">Create Job</button>
+                                <button class="conreq btn btn-outline-danger">Clear Log</button>
                             </div>
                         </div>
                     </div>
@@ -37,30 +38,35 @@
                     <div class="container-xl">
                         <div
                             class="stats w-100 d-flex flex-row align-items-center align-content-center justify-content-center">
-                            <div class="stats-item text-center text-primary px-4">
+                            <div class="stats-item text-center text-secondary px-4">
                                 <i class="d-block mb-1 bi bi-hourglass"></i>
-                                <span>Completed</span>
-                                <strong class="d-block" data-stats-completed>N/A</strong>
+                                <span>Waiting</span>
+                                <strong class="d-block" data-stats-waiting>-1</strong>
                             </div>
-                            <div class="stats-item text-center text-pink px-4 me-2">
+                            <div class="stats-item text-center text-primary px-4">
+                                <i class="d-block mb-1 bi bi-check"></i>
+                                <span>Completed</span>
+                                <strong class="d-block" data-stats-completed>-1</strong>
+                            </div>
+                            <div class="stats-item text-center text-success px-4 me-2">
                                 <i class="d-block mb-1 bi bi-terminal"></i>
-                                <span>Active</span>
-                                <strong class="d-block" data-stats-active>N/A</strong>
+                                <span>Running</span>
+                                <strong class="d-block" data-stats-active>-1</strong>
                             </div>
                             <div class="stats-item text-center text-warning px-4 me-2">
                                 <i class="d-block mb-1 bi bi-pause-btn"></i>
                                 <span>Paused</span>
-                                <strong class="d-block" data-stats-paused>N/A</strong>
+                                <strong class="d-block" data-stats-paused>-1</strong>
                             </div>
                             <div class="stats-item text-center text-info px-4 me-2">
                                 <i class="d-block mb-1 bi bi-clock-history"></i>
                                 <span>Delayed</span>
-                                <strong class="d-block" data-stats-delayed>N/A</strong>
+                                <strong class="d-block" data-stats-delayed>-1</strong>
                             </div>
                             <div class="stats-item text-center text-danger px-4 me-2">
                                 <i class="d-block mb-1 bi bi-x-circle"></i>
                                 <span>Failed</span>
-                                <strong class="d-block" data-stats-failed>N/A</strong>
+                                <strong class="d-block" data-stats-failed>-1</strong>
                             </div>
                         </div>
                     </div>
@@ -85,6 +91,7 @@
             <main class="conreq">
                 <div class="jobs-log h-100">
                     <div class="jobs-log-inner h-100">
+                        <div class="jobs-log-item" data-log-waiting></div>
                         <div class="jobs-log-item" data-log-completed></div>
                         <div class="jobs-log-item" data-log-active></div>
                         <div class="jobs-log-item" data-log-paused></div>

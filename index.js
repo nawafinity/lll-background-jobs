@@ -9,6 +9,8 @@ const { jobHandler } = require('./helpers/jobs');
 /**
  * Express configurations
  */
+ let clients = [];
+
 socket.on('connection', (client) => {
     log.info(`Someone join the party: ${client.id}`)
 
@@ -22,20 +24,45 @@ socket.on('connection', (client) => {
     })
 
     client.on('connect to redis', async () => {
-        await redis.connect()
+        // await redis.connect()
         log.success('[Redis] successfully connected.')
         socket.emit('redis connected')
+
+        redis.on('error', () => {
+            log.error('[Redis] Not cconnected.')
+
+        })
     })
 
+    client.on('clear log', () => {
 
+    })
+
+    client.on('create job', async (data) => {
+        // Create job
+
+
+        socket.emit('hydrate')
+    })
 })
+
+socket.on('disconnect', async (client)=>{
+    log.info(`Client (${client}) disconnected.`)
+
+    // do something
+    client.disconnect()
+})
+
+
 
 /**
  * Proccess our jobs
  */
 queue.process((job, done) => {
+
     // Emit all new topics to socket.
     socket.emit('topics', job)
+
 
     jobHandler(job).then(() => {
         // Close this job forever
@@ -84,6 +111,8 @@ app.get('/api/jobs/create', async (request, response, next) => {
             removeOnComplete: false,
             removeOnFail: false,
         });
+
+        socket.emit('hydrate')
 
         response.status(200).json({
             success: true

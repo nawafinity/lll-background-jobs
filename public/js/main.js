@@ -114,12 +114,18 @@ function fillfull(newJobs) {
 
             // List jobs
             Array.from(jobs[key]).forEach((job, jobKey) => {
+                const iconsMapping = {
+                    completed: 'check',
+                    waiting: 'pause',
+                    active: 'play',
+                    failed: 'arrow-clockwise'
+                }
                 let jobComponent = $('<div />')
                 jobComponent.attr('id', `job-${job.id}-progress`)
                 jobComponent.addClass('job')
                 jobComponent.html(`
                 <div class="job-title">${job.id}</div>
-                <div class="job-pause ms-auto"><i class="bi bi-pause-fill"></i></div>
+                <div class="job-pause ms-auto"><i class="bi bi-${iconsMapping[key]}"></i></div>
                 <div class="job-progress" style="width: ${job.progress}%"></div>
                 `)
                 $(`[data-log-${key}]`).append(jobComponent)

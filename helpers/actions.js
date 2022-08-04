@@ -7,9 +7,11 @@ const getAllJobs = async () => {
         const pausedJobs = await queue.getJobs(['paused'])
         const delayedJobs = await queue.getJobs(['delayed'])
         const failedJobs = await queue.getJobs(['failed'])
+        const waitingJobs = await queue.getJobs(['waiting'])
 
 
         resolve({
+            waiting: waitingJobs,
             completed: completedJobs,
             active: activeJobs,
             paused: pausedJobs,
