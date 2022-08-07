@@ -27,7 +27,41 @@
                         </div>
                         <div class="col-12 col-lg-6">
                             <div class="d-flex flex-row align-items-center justify-content-end">
-                                <button class="conreq btn btn-outline-primary me-2">Create Job</button>
+                                <button class="conreq btn btn-outline-primary me-2" data-bs-toggle="modal"
+                                data-bs-target="#CreateJobsModel">Create Job</button>
+                                <!-- Modal -->
+                                <div class="modal fade" id="CreateJobsModel" tabindex="-1"
+                                    aria-labelledby="CreateJobsModelLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="CreateJobsModelLabel">Modal title</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form>
+                                                    <label for="Sname">Subject name:</label><br>
+                                                    <input type="text" id="Sname" name="Sname" value=""
+                                                        class="form-control"> <br>
+                                                    <label for="ldate">Course start date:</label><br>
+                                                    <input type="date" id="Sdate" name="trip-start"
+                                                        class="form-control">
+                                                    <label for="ldate">Course end date:</label><br>
+                                                    <input type="date" id="Edate" name="trip-start"
+                                                        class="form-control">
+                                                    <br><br>
+                                                </form>
+                                            </div>
+                                            <div class="modal-footer">
+
+                                                <button class="form-control" onclick="AddJob()">
+                                                    Add Job
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                                 <button class="conreq btn btn-outline-danger" id="clearBtn">Clear</button>
                             </div>
                         </div>

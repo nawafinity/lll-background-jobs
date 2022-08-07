@@ -45,7 +45,29 @@ socket.on('connection', (client) => {
     client.on('create job', async (data) => {
         // Create job
 
+        console.log(data.Start_Date)
+    if (queue) {
+        const opts = { priority: 0, attempts: 5 };
+        await queue.add({ name: data }, { repeat: { every: 60000 ,limit: 2 , startDate:data.Start_Date , endDate:data.End_Date}}, {
+            attempts: opts.attempts,
+            backoff: {
+                type: "exponential",
+                delay: 0,
+            },
+            removeOnComplete: false,
+            removeOnFail: false,
+        });
 
+        socket.emit('hydrate')
+
+       // response.status(200).json({
+          //  success: true
+      //  })
+
+    } 
+	//else {
+        //response.send('Are you sure your redis server is running?')
+    //}
         socket.emit('hydrate')
     })
 

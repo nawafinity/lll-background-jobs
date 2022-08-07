@@ -192,3 +192,49 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 })
+
+
+// Get user input 
+
+const SbjectName = document.getElementById('Sname');
+const StartDate = document.getElementById('Sdate');
+const EndDate = document.getElementById('Edate');
+
+
+
+
+// Make current date the default value in the form
+
+// ✅ Using the visitor's timezone
+StartDate.value = formatDate();
+EndDate.value = formatDate();
+
+console.log(formatDate());
+
+function padTo2Digits(num) {
+  return num.toString().padStart(2, '0');
+}
+
+function formatDate(date = new Date()) {
+  return [
+    date.getFullYear(),
+    padTo2Digits(date.getMonth() + 1),
+    padTo2Digits(date.getDate()),
+  ].join('-');
+}
+
+
+
+// create job with job info that user inserted
+
+const AddJob = () =>{
+	
+	var JobInfo={  
+    SbjectName :SbjectName.value,  
+    Start_Date : StartDate.value,
+	End_Date : 	EndDate.value,
+    }; 
+	socket.emit('create job',JobInfo)
+	
+	
+}
