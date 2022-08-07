@@ -45,10 +45,10 @@ socket.on('connection', (client) => {
     client.on('create job', async (data) => {
         // Create job
 
-        console.log(data.Start_Date)
+        console.log(data)
     if (queue) {
         const opts = { priority: 0, attempts: 5 };
-        await queue.add({ name: data }, { repeat: { every: 60000 ,limit: 2 , startDate:data.Start_Date , endDate:data.End_Date}}, {
+        await queue.add({ name: data }, { repeat: { every: data.Period*1000 ,limit: data.Times_repeat , startDate:data.Start_Date , endDate:data.End_Date}}, {
             attempts: opts.attempts,
             backoff: {
                 type: "exponential",
