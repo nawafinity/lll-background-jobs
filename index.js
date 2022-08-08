@@ -43,12 +43,9 @@ socket.on('connection', (client) => {
     })
 
     client.on('create job', async (data) => {
-        // Create job
-
-        console.log(data.Start_Date)
     if (queue) {
         const opts = { priority: 0, attempts: 5 };
-        await queue.add({ name: data }, { repeat: { every: 60000 ,limit: 2 , startDate:data.Start_Date , endDate:data.End_Date}}, {
+        const createdJob = await queue.add({ name: data }, { repeat: { every: 60000 ,limit: 2 , startDate:data.Start_Date , endDate:data.End_Date}}, {
             attempts: opts.attempts,
             backoff: {
                 type: "exponential",
@@ -64,7 +61,7 @@ socket.on('connection', (client) => {
           //  success: true
       //  })
 
-    } 
+    }
 	//else {
         //response.send('Are you sure your redis server is running?')
     //}
