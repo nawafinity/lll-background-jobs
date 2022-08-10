@@ -48,7 +48,7 @@ socket.on('connection', (client) => {
         console.log(data)
     if (queue) {
         const opts = { priority: 0, attempts: 5 };
-        await queue.add({ name: data }, { repeat: { every: data.Period*1000 ,limit: data.Times_repeat , startDate:data.Start_Date , endDate:data.End_Date}}, {
+        await queue.add(data, { repeat: { every: data.Period*1000 ,limit: data.Times_repeat , startDate:data.Start_Date , endDate:data.End_Date}}, {
             attempts: opts.attempts,
             backoff: {
                 type: "exponential",

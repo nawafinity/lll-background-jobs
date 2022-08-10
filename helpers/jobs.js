@@ -8,7 +8,7 @@ const { queue, socket } = require('../spirit/core')
 const jobHandler = async (job) => {
     const currentJob = await queue.getJob(job.id)
 
-    socket.emit(`job-${currentJob.id}-progress`, 3)
+    socket.emit(`job-${currentJob.id}-progress`, 5)
     currentJob.progress(3)
 
     return new Promise((resolve, reject) => {
