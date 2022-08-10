@@ -199,9 +199,15 @@ document.addEventListener('DOMContentLoaded', () => {
 const SbjectName = document.getElementById('Sname');
 const StartDate = document.getElementById('Sdate');
 const EndDate = document.getElementById('Edate');
+const Limit = document.getElementById('times_repeat');
+const Every = document.getElementById('every');
 
 
+// validate end date
 
+//if (EndDate<=StartDate) {
+// return false;
+//}
 
 // Make current date the default value in the form
 
@@ -233,6 +239,15 @@ const AddJob = () => {
         SbjectName: SbjectName.value,
         Start_Date: StartDate.value,
         End_Date: EndDate.value,
+        Times_repeat: Limit.value,
+        Period: Every.value
     };
-    socket.emit('create job', JobInfo)
+
+    if (EndDate.value <= StartDate.value) {
+        alert("invalid date");
+    }
+    else {
+        socket.emit('create job', JobInfo)
+    }
+
 }
