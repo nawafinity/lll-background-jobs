@@ -64,6 +64,7 @@ main {
     align-self: auto;
     padding: 12px;
     background: white;
+    width: 50%;
 }
 
 .job {
