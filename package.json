@@ -7,6 +7,7 @@
     "async": "^2.4.0",
     "axios": "^0.27.2",
     "body-parser": "^1.15.2",
+    "bootstrap-cron-picker": "^1.0.0",
     "bull": "^4.8.5",
     "express": "^4.10.2",
     "log-beautify": "^1.2.0",
