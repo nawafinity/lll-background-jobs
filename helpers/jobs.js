@@ -3,6 +3,13 @@ const axios = require('axios')
 
 /**
  * 
+ * @param {*} message 
+ */
+const sendMessageToTeams = async (message) => {
+    socket.emit('teams message', message)
+}
+/**
+ * 
  * @param {*} job 
  * @param {*} progress 
  */

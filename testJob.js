@@ -1,75 +1,20 @@
 const axios = require('axios')
 
-const get = () => {
-    
-return new Promise(async (resolve, reject) => {
-    const API_KEY = '244c4b48eadb783a69cc47eb2b24d6e89c708f3657917efca4b3f5c7b2d6d23c'
-    const topic = "Testing"
-    const resources = []
-    const result = await axios.get(
-        `https://serpapi.com/search?engine=google_scholar&api_key=${API_KEY}&q=${topic}`
-    );
-    // updateProgress(currentJob, ++progress);
-
-    if (typeof result.data === "object") {
-        const data = result.data;
-        if (data.hasOwnProperty("organic_results")) {
-            const organicResults = data.organic_results;
-
-            //console.log('organic_results')
-
-            organicResults.forEach((element) => {
-                const resource = {};
-
-                if (element.hasOwnProperty("title")) {
-                    resource.title = element.title;
-                }
-
-                if (element.hasOwnProperty("resources")) {
-                    //console.log('testt')
-
-                    //console.log(resource.resources=element.link)
-
-                    //resource.link=element.link
-
-                    element.resources.forEach((r) => {
-                        resource.link = r.link;
-                        return;
-                    });
-                }
-
-                // progrss = progrss + 5;
-
-                resources.push(resource);
-
-                // socket.emit(`job-${currentJob.id}-progress`, [progrss]);
-
-                // currentJob.progress(progrss);
-            });
+const sendMessageToTeams = async (message) => {
+    const TEAM_ID = 'af6afdac-47c9-4253-9ce7-c2b09a5685ce'
+    const CHANNEL_ID = '19%3a93e15bd6864c461ca2710bbbbce968bf%40thread.tacv2'
+    const TOKEN = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6IjJaUXBKM1VwYmpBWVhZR2FYRUpsOGxWMFRPSSIsImtpZCI6IjJaUXBKM1VwYmpBWVhZR2FYRUpsOGxWMFRPSSJ9.eyJhdWQiOiJhcGk6Ly9kZWE3ZmIxZi1kNmI5LTRlNjctOWI4Yi1hZjNmYTA0MzU1ZTciLCJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC8xMjBlZGRmZS00MTVhLTQ3ZDQtYjNhMC02NzU0NGRlNWIwYmEvIiwiaWF0IjoxNjYwMjEwNTY1LCJuYmYiOjE2NjAyMTA1NjUsImV4cCI6MTY2MDIxNDQ2NSwiYWlvIjoiRTJaZ1lDamcrUGlpTTlFK2Z0WWV2VHRNUmlmS0FRPT0iLCJhcHBpZCI6ImRlYTdmYjFmLWQ2YjktNGU2Ny05YjhiLWFmM2ZhMDQzNTVlNyIsImFwcGlkYWNyIjoiMSIsImlkcCI6Imh0dHBzOi8vc3RzLndpbmRvd3MubmV0LzEyMGVkZGZlLTQxNWEtNDdkNC1iM2EwLTY3NTQ0ZGU1YjBiYS8iLCJvaWQiOiI1NTg3Yzc3NC03ZDcyLTQyZTMtYjk0MS05ZDY3ZTM0YmM2ZTQiLCJyaCI6IjAuQVhvQV90ME9FbHBCMUVlem9HZFVUZVd3dWhfN3A5NjUxbWRPbTR1dlA2QkRWZWQ2QUFBLiIsInN1YiI6IjU1ODdjNzc0LTdkNzItNDJlMy1iOTQxLTlkNjdlMzRiYzZlNCIsInRpZCI6IjEyMGVkZGZlLTQxNWEtNDdkNC1iM2EwLTY3NTQ0ZGU1YjBiYSIsInV0aSI6IkJLRDRqSTVLOTBhbzRhNlE2NVVRQUEiLCJ2ZXIiOiIxLjAifQ.j04FDiveFGJN3HWhSwjMHf_DlrkCn9wGyXLMGMC2U2XhWWMgoVS6jgW0C2bh0VPVK_B4LSbzDQqnR1kuqTV84naTdwLr6JV9jdZ6dr_XKZ8501qdVDP2JoMdfP1krSzvOJwg4c9IzoI61I-L3PFkNtDoZSTGAl1FinHsOH1BMArZISZP2JXM62mZ3cUwQtoOcxNpI4-R8eh_gLwLNst4jvz-08hqga5mIQoeyujQ3qdvtamMxqyh3zt5AWCpaBcspjrPJN5osnO8DmTHfDzJuNQyKAGh0cCNawTHDsTxFJ5mpBMAHlBcqaYyG__ebalfdFz2fFSnRTqjWaM2sza4wA'
+    const response = await axios.post(`https://graph.microsoft.com/beta/teams/${TEAM_ID}/channels/${CHANNEL_ID}/messages`, {
+        body: {
+            content: message
         }
+    }, {
+        Authorization: `Bearer ${TOKEN}`
+    })
 
-        // const currentData = currentJob.data;
-
-        // currentData.resources = resources;
-
-        // await currentJob.update(currentData);
-
-        // socket.emit(`job-${currentJob.id}-progress`, 100);
-
-        // currentJob.progress(100);
-
-        resolve(resources);
-    } else {
-        // await currentJob.moveToFailed();
-
-        reject(false);
-    }
-    
-});
-
+    console.log(response)
 }
 
 
-get().then((r) => {
-    console.log(r)
-})
+
+sendMessageToTeams('TEST FROM API GATEWAY')

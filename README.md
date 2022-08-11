@@ -8,6 +8,15 @@ This project made for life-long-learning program in NIC.
 
 This application allows you to connect to your Redis cluster and visualize the job queue and job workers.
 
+## How it's work
+![idea drawio](https://user-images.githubusercontent.com/50952092/184124469-2579b188-e8ed-48c6-9b87-7b2dfbd3924c.png)
+
+## Team members
+- Nawaf KL
+- Aljawharah Aldukhayni
+- Ahmed Alamoudi
+- Abdullah Alnawfal
+
 ## Requirements
 - Radis should be installed and running
 - Docker to run radis
