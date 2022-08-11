@@ -198,48 +198,20 @@ document.addEventListener('DOMContentLoaded', () => {
 // Get user input
 
 const SbjectName = document.getElementById('Sname');
-<<<<<<< Updated upstream
-const StartDate = document.getElementById('Sdate');
-const EndDate = document.getElementById('Edate');
-const Limit = document.getElementById('times_repeat');
-const Every = document.getElementById('every');
-
-
-// validate end date
-
-//if (EndDate<=StartDate) {
-// return false;
-//}
-=======
 const JobScheduling = document.getElementById('JobS');
 
 
 
->>>>>>> Stashed changes
 
 
 
 // create job with job info that user inserted
 
-<<<<<<< Updated upstream
-function padTo2Digits(num) {
-    return num.toString().padStart(2, '0');
-}
-
-function formatDate(date = new Date()) {
-    return [
-        date.getFullYear(),
-        padTo2Digits(date.getMonth() + 1),
-        padTo2Digits(date.getDate()),
-    ].join('-');
-}
-=======
 const AddJob = () => {
 
     var JobInfo1 = {
         SbjectName: SbjectName.value,
     };
->>>>>>> Stashed changes
 
 
     var JobInfo2 = {
@@ -265,26 +237,6 @@ const AddJob = () => {
 
 
 
-<<<<<<< Updated upstream
-const AddJob = () => {
-
-    var JobInfo = {
-        SbjectName: SbjectName.value,
-        Start_Date: StartDate.value,
-        End_Date: EndDate.value,
-        Times_repeat: Limit.value,
-        Period: Every.value
-    };
-
-    if (EndDate.value <= StartDate.value) {
-        alert("invalid date");
-    }
-    else {
-        socket.emit('create job', JobInfo)
-    }
-
-=======
->>>>>>> Stashed changes
 }
 
 
