@@ -198,6 +198,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // Get user input
 
 const SbjectName = document.getElementById('Sname');
+<<<<<<< Updated upstream
 const StartDate = document.getElementById('Sdate');
 const EndDate = document.getElementById('Edate');
 const Limit = document.getElementById('times_repeat');
@@ -209,15 +210,18 @@ const Every = document.getElementById('every');
 //if (EndDate<=StartDate) {
 // return false;
 //}
+=======
+const JobScheduling = document.getElementById('JobS');
 
-// Make current date the default value in the form
 
-// ✅ Using the visitor's timezone
-StartDate.value = formatDate();
-EndDate.value = formatDate();
 
-console.log(formatDate());
+>>>>>>> Stashed changes
 
+
+
+// create job with job info that user inserted
+
+<<<<<<< Updated upstream
 function padTo2Digits(num) {
     return num.toString().padStart(2, '0');
 }
@@ -229,11 +233,39 @@ function formatDate(date = new Date()) {
         padTo2Digits(date.getDate()),
     ].join('-');
 }
+=======
+const AddJob = () => {
+
+    var JobInfo1 = {
+        SbjectName: SbjectName.value,
+    };
+>>>>>>> Stashed changes
+
+
+    var JobInfo2 = {
+        SbjectName: SbjectName.value,
+        JobScheduling: JobScheduling.value,
+    };
 
 
 
-// create job with job info that user inserted
+    if(document.getElementById('JustNow').checked) {
+        socket.emit('create job one', JobInfo1)
 
+        //Male radio button is checked
+      }else if(document.getElementById('JS').checked) {
+        socket.emit('create job', JobInfo2)
+      }
+      
+
+    SbjectName.value = '';
+    JobScheduling.value='';
+    document.getElementById('JustNow').checked=false;
+    document.getElementById('JS').checked=false;
+
+
+
+<<<<<<< Updated upstream
 const AddJob = () => {
 
     var JobInfo = {
@@ -251,4 +283,13 @@ const AddJob = () => {
         socket.emit('create job', JobInfo)
     }
 
+=======
+>>>>>>> Stashed changes
 }
+
+
+
+
+
+
+

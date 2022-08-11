@@ -44,19 +44,13 @@
                                                     <label for="Sname">Subject name :</label><br>
                                                     <input type="text" id="Sname" name="Sname" value=""
                                                         class="form-control"> <br>
-                                                    <label for="ldate">Course start date :</label><br>
-                                                    <input type="date" id="Sdate" name="trip-start"
-                                                        class="form-control"> <br>
-                                                    <label for="ldate">Course end date :</label><br>
-                                                    <input type="date" id="Edate" name="trip-start"
+                                                        <input type="radio" id="JustNow" name="Job" value="JustNow">
+                                                        <label for="JustNow">Create Job one time</label><br><br>
+                                                        <input type="radio" id="JS" name="Job">
+                                                        <label for="JS">Job scheduling</label><br><br>
+                                                    <input type="text" id="JobS" name="trip-start" placeholder="Should be in Cron format" 
                                                         class="form-control">
                                                         <br> 
-                                                    <label for="times_repeat">How many times job should repeat ?</label><br>
-                                                    <input type="text" id="times_repeat" name="trip-start"
-                                                            class="form-control"> <br>
-                                                            <label for="every">Period between jobs (Sec) :</label><br>
-                                                    <input type="text" id="every" name="trip-start"
-                                                        class="form-control">
                                                     <br><br>
                                                 </form>
                                             </div>
